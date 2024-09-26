@@ -1,0 +1,19 @@
+*{
+  box-sizing: border-box;
+}
+
+#word{
+  display: flex;
+
+}
+.word{
+  margin: 0 5px;
+  width: 10px;
+  color: transparent;
+  border-bottom: 2px solid black;
+  text-align: center;
+}
+
+.none{
+  display: none;
+}
