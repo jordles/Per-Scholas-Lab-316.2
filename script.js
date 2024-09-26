@@ -4,6 +4,7 @@
 // Use DOM manipulation to give a visual indication of the game's progress in some way.
 
 const categoryEl = document.querySelector('#category');
+const word = [...document.querySelectorAll('#word span')];
 const choices = {
   animals: ['lion', 'tiger', 'zebra', 'hippo', 'giraffe'],
   fruits: ['apple', 'banana', 'orange', 'pineapple', 'strawberry'],
@@ -32,4 +33,36 @@ const createWord = () => {
     wordEl.appendChild(div);
   }
 }
-console.log(createWord());
+
+const getGuess = () => {
+  const guess = prompt('Guess a letter');
+  return guess.toLowerCase();
+}
+
+const checkGuess = () => {
+  const guess = getGuess();
+  
+  const guessEl = document.querySelector('#guesses');
+  let guessBool = false;
+  word.forEach((letter) => {
+    if(guess === letter.textContent){
+      letter.classList.remove('none');
+      guessBool = true;
+    }
+  })
+  if(!guessBool) guessEl.textContent += guess;
+}
+
+const areAllLettersGuessed = () => {
+  console.log(!(word.some((letter) => letter.classList.contains('none'))))
+  return !word.some((letter) => letter.classList.contains('none'));
+}
+
+
+
+const checkWin = () => {
+  checkGuess();
+  areAllLettersGuessed() ? alert('You won!') : checkWin();
+}
+createWord();
+checkWin();
