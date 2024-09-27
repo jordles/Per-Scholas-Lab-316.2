@@ -25,14 +25,15 @@ const createWord = () => {
   const word = getWord();
   const wordEl = document.querySelector('#word');
 
-  for (let i = 0; i < word.length; i++) {
+  for (const char of word) {
     const div = document.createElement('div');
-    div.classList.add('word');
     const span = document.createElement('span');
-    span.classList.add('none');
-    span.textContent = word[i];
+    span.textContent = char;
     div.appendChild(span);
     wordEl.appendChild(div);
+    if (char === ' ') continue;
+    div.classList.add('word');
+    span.classList.add('none');
   }
   return word;
 }
@@ -46,19 +47,19 @@ const checkGuess = () => {
   const guess = getGuess();
   
   let guessBool = false;
-  
-  wordSpans.forEach((letter) => {
-    if(guess === letter.textContent){
-      letter.classList.remove('none');
-      guessBool = true;
-    }
-    else if(guess === word){
+  if(guess === word){
       
-      wordSpans.forEach((letter) => {if(letter.classList.contains('none')) letter.classList.remove('none')});
-      guessBool = true;
-      setTimeout(() => alert('You won!🎉🎉'), 500);
-    }
-  })
+    wordSpans.forEach((letter) => {if(letter.classList.contains('none')) letter.classList.remove('none')});
+    guessBool = true;
+  }
+  else{
+    wordSpans.forEach((letter) => {
+      if(guess === letter.textContent){
+        letter.classList.remove('none');
+        guessBool = true;
+      }
+    })
+  }
   if(!guessBool){
     const span = document.createElement('span');
     span.textContent = guess;
@@ -75,9 +76,12 @@ const areAllLettersGuessed = () => {
 
 const checkWin = () => {
   checkGuess();
+  areAllLettersGuessed() ? 
   setTimeout(() => {
-    areAllLettersGuessed() ? alert('You won!🎉🎉') : checkWin();
-  }, 1000);
+    alert('You won!🎉🎉')
+    confirm('Play again?') ? window.location.reload() : alert('Bye!')
+  }, 1000) 
+  : setTimeout(checkWin, 1000);
   
 }
 
@@ -85,6 +89,7 @@ const checkLoss = () => {
   guesses--;
   guessesEl.textContent = `You have ${guesses} guesses left.`;
   if(guesses === 0) alert('You lost!😭😭');
+  confirm('Play again?') ? window.location.reload() : alert('Bye!')
 }
 const word =createWord();
 const wordSpans = [...document.querySelectorAll('#word span')];
