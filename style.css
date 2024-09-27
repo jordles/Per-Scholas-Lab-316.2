@@ -16,3 +16,23 @@
 .none{
   display: none;
 }
+
+#letters-used{
+  /* text-decoration: line-through;
+  text-decoration-color: red; */
+}
+#letters-used span{
+  position: relative;
+  padding: 5px;
+}
+#letters-used span::before{
+  position: absolute;
+  content: "";
+  left: 0%;
+  top: 55%;
+  right: 0;
+  border-top: 1px solid;
+  border-color: red;
+  transform: rotate(-25deg);
+    
+}
