@@ -9,11 +9,20 @@ const letUsedEl = document.querySelector('#letters-used');
 const choices = {
   animals: ['lion', 'tiger', 'zebra', 'hippo', 'giraffe'],
   fruits: ['apple', 'banana', 'orange', 'pineapple', 'strawberry'],
-  cities: ['new york', 'los angeles', 'chicago', 'houston', 'dallas'],
+  cities: ['new york', 'los angeles', 'chicago', 'houston', 'dallas', 'beverly hills'],
 }
 let guesses = 8;
 const getWord = () => {
-  const category = prompt('Choose a category: 1 for animals, 2 for fruits, 3 for cities');
+  let validInput = false;
+  let category;
+  while(!validInput){
+    category = prompt('Choose a category: 1 for animals, 2 for fruits, 3 for cities');
+    console.log(typeof category);
+    if(typeof Number(category) !== 'number' || category < 1 || category > 3){
+      alert('Invalid input! Choose a number between 1 and 3');
+    }
+    else validInput = true;
+  }
   let keys = Object.keys(choices);
   categoryEl.textContent = `Your chosen category is: ${keys[category-1][0].toUpperCase() + keys[category-1].slice(1)}`;
   guessesEl.textContent = `You have ${guesses} guesses left.`;
@@ -61,10 +70,25 @@ const checkGuess = () => {
     })
   }
   if(!guessBool){
-    const span = document.createElement('span');
-    span.textContent = guess;
-    letUsedEl.appendChild(span);
-    checkLoss();
+    let usedChars = document.querySelectorAll('#letters-used > span');
+    if([...usedChars].map(char => char.textContent).includes(guess)){
+      alert('You already guessed that!')
+    }else{
+      const span = document.createElement('span');
+      span.textContent = guess;
+      letUsedEl.appendChild(span);
+    }
+    /* if(usedChars){
+      console.log(usedChars)
+      usedChars.forEach(char => {
+        if(char.textContent === guess) {
+          alert('You already guessed that!')
+          checkLoss();
+        }
+      })
+    } */
+    
+    checkLoss();    
   }
 }
 
@@ -88,8 +112,10 @@ const checkWin = () => {
 const checkLoss = () => {
   guesses--;
   guessesEl.textContent = `You have ${guesses} guesses left.`;
-  if(guesses === 0) alert('You lost!😭😭');
-  confirm('Play again?') ? window.location.reload() : alert('Bye!')
+  if(guesses === 0) {
+    alert('You lost!😭😭');
+    confirm('Play again?') ? window.location.reload() : alert('Bye!')
+  }
 }
 const word =createWord();
 const wordSpans = [...document.querySelectorAll('#word span')];

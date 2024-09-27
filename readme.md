@@ -8,4 +8,4 @@ I didn't realize how important setTimeOut was when utilizing them with the windo
 
 I made it so if you guess the entire word and its wrong, it will show up on the DOM that the whole word is wrong, instead of picking out which letters were wrong from the word. Since the user can hit multiple letters or the whole alphabet if they wanted from one 'word' alone.
 
-I kept in mind, to use past implementations of code we've done in class in this assignment as well. Regarding the BOM, I used prompt, alert, and location.reload for interacting with the user. 
+I kept in mind, to use past implementations of code we've done in class in this assignment as well. Regarding the BOM, I used prompt, alert, and location.reload for interacting with the user. I implemented error/type handling which is shown through the window object to the user instead of throwing an error on console. 
