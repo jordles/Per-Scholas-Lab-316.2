@@ -13,9 +13,9 @@ const getWord = () => {
   let validInput = false;
   let category;
   while(!validInput){
-    category = prompt('Choose a category: 1 for animals, 2 for fruits, 3 for cities');
-    console.log(typeof category);
-    if(typeof Number(category) !== 'number' || category < 1 || category > 3){
+    category = Number(prompt('Choose a category: 1 for animals, 2 for fruits, 3 for cities'));
+
+    if(isNaN(category)|| category < 1 || category > 3){
       alert('Invalid input! Choose a number between 1 and 3');
     }
     else validInput = true;
