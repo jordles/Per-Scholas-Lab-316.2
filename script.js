@@ -1,7 +1,4 @@
-// Here is a list of requirements for easy reference:
-// Create a simple guessing game that pushes users toward the correct answer in some iterative way. The game does not need to be practical or complicated.
-// Use window object methods to gather input from the user and display information to the user.
-// Use DOM manipulation to give a visual indication of the game's progress in some way.
+
 
 const categoryEl = document.querySelector('#category');
 const guessesEl = document.querySelector('#guesses');
@@ -121,5 +118,5 @@ const word =createWord();
 const wordSpans = [...document.querySelectorAll('#word span')];
 let div = document.createElement('div');  // Create the span element
 div.textContent = 'Letters used: ';        // Set the text content
-letUsedEl.appendChild(div);                // Append the span to the parent element
+letUsedEl.appendChild(div); // Append the span to the parent element
 setTimeout(checkWin, 1000);
