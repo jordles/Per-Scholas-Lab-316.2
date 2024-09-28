@@ -1,6 +1,8 @@
 # Per Scholas Lab 316.2 Hangman (Guessing Game)
 This assignment focused on utilizing the BOM and manipulating the DOM. 
 
+[Demo Link](https://jordles.github.io/Per-Scholas-Lab-316.2/)
+
 ## Requirements
 
 * Here is a list of requirements for easy reference:
